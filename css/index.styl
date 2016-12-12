@@ -1,0 +1,85 @@
+@import 'nib';
+
+global-reset();
+
+menuwidth = 12rem;
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 1.5rem;
+  line-height: 1.5rem;
+}
+
+a:not(:hover) {
+  text-decoration: none;
+}
+
+.menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: menuwidth;
+  height: 100%;
+  background-color: #222;
+  color: #fff;
+
+  .menu-item {
+    margin: 0rem -1rem;
+    padding: .375rem 1rem;
+    line-height: 1.5rem;
+    cursor: pointer;
+
+    &.current {
+      background-color: #fff;
+      color: #222;
+    }
+
+    &:not(.current):hover {
+      background-color: #444;
+    }
+  }
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  left: menuwidth;
+  width: calc(100% - menuwidth);
+  height: 100%;
+}
+
+.menu, .content {
+  padding: 1rem;
+}
+
+.debug {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 8rem;
+  overflow: auto;
+  background-color: rgba(#000, .75);
+  color: #fff;
+  padding: 1rem;
+
+  p {
+    font-size: .75rem;
+    line-height: 1rem;
+    margin: 0;
+  }
+}
