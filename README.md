@@ -9,6 +9,8 @@ https://pakastin.github.io/redom-state/
 npm start
 ```
 
+Then navigate to http://localhost:8080/
+
 ## Dev mode
 ```
 npm run dev
