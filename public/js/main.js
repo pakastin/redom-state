@@ -685,13 +685,13 @@ var actions = function (app) {
       var text = ref.text;
 
       app.data = Object.assign({}, app.data,
-        {editable: app.data.editable.concat([
+        {editable: app.data.editable.concat(
           {
             id: id++,
             type: type,
             text: text
           }
-        ])});
+        )});
       app.update();
     },
     'remove-text': function (id) {
