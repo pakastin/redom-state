@@ -432,15 +432,20 @@ var Home = function Home () {
   this.el = el('.home',
     el('h1', 'Home'),
     el('p', 'Welcome to RE:DOM state handling example.'),
-    el('a', { href: '#about' }, 'Check out about section for some more info.')
+    el('p',
+      el('a', { href: '#about' }, 'Check out about section for some more info.')
+    ),
+    el('p',
+      el('a', { target: '_blank', href: 'https://github.com/pakastin/redom-state' }, 'See source on Github!')
+    )
   );
 };
 
-var About = function About () {
+var Info = function Info () {
   var this$1 = this;
 
-  this.el = el('.about',
-    el('h1', 'About RE:DOM state handling'),
+  this.el = el('.info',
+    el('h1', 'RE:DOM state handling'),
     el('p', 'I like to do RE:DOM state handling so that I dispatch custom HTML event upstream and update RE:DOM components downstream.'),
     el('p', 'Turn on the debug mode, navigate around and see what happens under the hood:'),
     this.toggleDebug = el('button'),
@@ -462,7 +467,7 @@ var About = function About () {
     dispatch(this$1, 'toggle-logo');
   };
 };
-About.prototype.update = function update (data) {
+Info.prototype.update = function update (data) {
   var debug = data.debug;
     var logo = data.logo;
 
@@ -483,12 +488,66 @@ About.prototype.update = function update (data) {
   this.data = data;
 };
 
+var Fiddle = function Fiddle () {
+  var this$1 = this;
+
+  this.el = el('.fiddle',
+    el('h1', 'Try add some content'),
+    this.form = el('form',
+      this.type = el('select',
+        el('option', { value: 'h1' }, 'h1'),
+        el('option', { value: 'h2' }, 'h2'),
+        el('option', { value: 'p' }, 'p')
+      ),
+      this.text = el('input', { autofocus: true, placeholder: 'text' }),
+      el('button', { type: 'submit' }, 'Add text'),
+      el('br'),
+      el('br'),
+      this.editable = list('.editable', Text, 'id')
+    )
+  );
+
+  this.form.onsubmit = function (e) {
+    e.preventDefault();
+
+    dispatch(this$1, 'add-text', {
+      type: this$1.type.value,
+      text: this$1.text.value
+    });
+    this$1.text.value = '';
+    this$1.text.focus();
+  };
+};
+Fiddle.prototype.update = function update (data) {
+  var editable = data.editable;
+
+  this.editable.update(editable);
+  this.data = data;
+};
+
+var Text = function Text (initData, data) {
+  var this$1 = this;
+
+  this.el = el(data.type,
+    this.span = el('span'),
+    this.remove = el('button', 'x')
+  );
+  this.remove.onclick = function (e) {
+    dispatch(this$1, 'remove-text', this$1.data.id);
+  };
+};
+Text.prototype.update = function update (data) {
+  this.span.textContent = data.text;
+  this.data = data;
+};
+
 var Content = function Content () {
   this.el = el('.content');
 
   this.router = router(this.el, {
     '': Home,
-    about: About
+    info: Info,
+    fiddle: Fiddle
   });
 };
 Content.prototype.update = function update (data) {
@@ -587,6 +646,8 @@ var api = function (app, actions) {
   app.startRoute = onHash;
 };
 
+var id = Date.now();
+
 var actions = function (app) {
   return {
     route: function (path) {
@@ -618,6 +679,27 @@ var actions = function (app) {
         {logo: logo});
 
       app.update();
+    },
+    'add-text': function (ref) {
+      var type = ref.type;
+      var text = ref.text;
+
+      app.data = Object.assign({}, app.data,
+        {editable: app.data.editable.concat([
+          {
+            id: id++,
+            type: type,
+            text: text
+          }
+        ])});
+      app.update();
+    },
+    'remove-text': function (id) {
+      app.data = Object.assign({}, app.data,
+        {editable: app.data.editable.filter(function (item) {
+          return item.id !== id;
+        })});
+      app.update();
     }
   };
 };
@@ -625,8 +707,10 @@ var actions = function (app) {
 var data = {
   sections: [
     { id: '', name: 'Home' },
-    { id: 'about', name: 'About' }
-  ]
+    { id: 'info', name: 'Info' },
+    { id: 'fiddle', name: 'Fiddle' }
+  ],
+  editable: []
 };
 
 var app = new App(data);
