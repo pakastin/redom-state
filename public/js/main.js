@@ -453,7 +453,7 @@ var Info = function Info () {
     this.toggleLogo = el('button'),
     el('br'),
     el('br'),
-    this.logo = el('img'),
+    this.logo = el('img', { src: 'https://redom.js.org/img/logo.svg' }),
     el('br'),
     el('br'),
     el('p',
@@ -479,10 +479,10 @@ Info.prototype.update = function update (data) {
 
   if (logo) {
     this.toggleLogo.textContent = 'Hide logo';
-    this.logo.src = 'https://redom.js.org/img/logo.svg';
+    this.logo.style.display = '';
   } else {
     this.toggleLogo.textContent = 'Show logo';
-    this.logo.src = '';
+    this.logo.style.display = 'none';
   }
 
   this.data = data;
