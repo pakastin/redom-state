@@ -41,13 +41,13 @@ export default (app) => {
     'add-text': ({ type, text }) => {
       app.data = {
         ...app.data,
-        editable: app.data.editable.concat([
+        editable: app.data.editable.concat(
           {
             id: id++,
             type,
             text
           }
-        ])
+        )
       };
       app.update();
     },
