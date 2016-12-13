@@ -19,6 +19,12 @@ h1 {
   margin-bottom: 1rem;
 }
 
+h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
 p {
   margin-bottom: 1.5rem;
   line-height: 1.5rem;
@@ -81,5 +87,15 @@ a:not(:hover) {
     font-size: .75rem;
     line-height: 1rem;
     margin: 0;
+  }
+}
+
+.editable {
+  h1, h2, p {
+    &:not(:hover) {
+      button {
+        display: none;
+      }
+    }
   }
 }

@@ -1,7 +1,8 @@
 import { el, router } from 'redom';
 
 import { Home } from './home';
-import { About } from './about';
+import { Info } from './info';
+import { Fiddle } from './fiddle';
 
 export class Content {
   constructor () {
@@ -9,7 +10,8 @@ export class Content {
 
     this.router = router(this.el, {
       '': Home,
-      about: About
+      info: Info,
+      fiddle: Fiddle
     });
   }
   update (data) {

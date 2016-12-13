@@ -1,6 +1,8 @@
 export default {
   sections: [
     { id: '', name: 'Home' },
-    { id: 'about', name: 'About' }
-  ]
+    { id: 'info', name: 'Info' },
+    { id: 'fiddle', name: 'Fiddle' }
+  ],
+  editable: []
 };

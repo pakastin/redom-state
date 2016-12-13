@@ -1,10 +1,10 @@
 import { el } from 'redom';
 import { dispatch } from '../utils/dispatch';
 
-export class About {
+export class Info {
   constructor () {
-    this.el = el('.about',
-      el('h1', 'About RE:DOM state handling'),
+    this.el = el('.info',
+      el('h1', 'RE:DOM state handling'),
       el('p', 'I like to do RE:DOM state handling so that I dispatch custom HTML event upstream and update RE:DOM components downstream.'),
       el('p', 'Turn on the debug mode, navigate around and see what happens under the hood:'),
       this.toggleDebug = el('button'),

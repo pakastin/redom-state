@@ -1,3 +1,5 @@
+let id = Date.now();
+
 export default (app) => {
   return {
     route: (path) => {
@@ -34,6 +36,28 @@ export default (app) => {
         logo
       };
 
+      app.update();
+    },
+    'add-text': ({ type, text }) => {
+      app.data = {
+        ...app.data,
+        editable: app.data.editable.concat([
+          {
+            id: id++,
+            type,
+            text
+          }
+        ])
+      };
+      app.update();
+    },
+    'remove-text': (id) => {
+      app.data = {
+        ...app.data,
+        editable: app.data.editable.filter(item => {
+          return item.id !== id;
+        })
+      };
       app.update();
     }
   };
