@@ -446,7 +446,12 @@ var Info = function Info () {
 
   this.el = el('.info',
     el('h1', 'RE:DOM state handling'),
-    el('p', 'I like to do RE:DOM state handling so that I dispatch custom HTML event upstream and update RE:DOM components downstream.'),
+    el('p',
+      'I like to do RE:DOM state handling so that I dispatch custom HTML event upstream and update RE:DOM components downstream.',
+      el('br'),
+      'To learn more how it works, check out Github repo: ',
+      el('a', { href: 'https://github.com/pakastin/redom-state' }, 'https://github.com/pakastin/redom-state')
+    ),
     el('p', 'Turn on the debug mode, navigate around and see what happens under the hood:'),
     this.toggleDebug = el('button'),
     el('br'),
