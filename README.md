@@ -10,6 +10,12 @@ https://github.com/pakastin/redom-state/blob/master/js/utils/dispatch.js
 
 It uses native HTML events to dispatch actions upstream and RE:DOM component updates to update views downstream. That's it :)
 
+## Benefits
+- Fast
+- Small
+- Asynchronous, but immediate
+- Flexible (stopPropagation etc)
+
 ## Run
 ```
 npm start
