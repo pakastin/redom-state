@@ -39,8 +39,8 @@ export class Debug {
     this.data = data;
   }
   log (msg) {
-    mount(this.el, el('p', '<- ' + msg));
-    mount(this.el, el('p', '-> ' + JSON.stringify(this.app.data, null, ' ')));
+    mount(this.el, el('p', Date.now() + ' <- ' + msg));
+    mount(this.el, el('p', Date.now() + ' -> ' + JSON.stringify(this.app.data, null, ' ')));
     mount(this.el, el('br'));
 
     this.el.scrollTop = this.el.scrollHeight;
