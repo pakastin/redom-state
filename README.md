@@ -5,7 +5,7 @@
 https://pakastin.github.io/redom-state/
 
 ## How it works?
-The whole state handling code is 447 bytes:
+The whole [redux](https://github.com/reactjs/redux)-like state handling code is only 447 bytes:
 https://github.com/pakastin/redom-state/blob/master/js/utils/dispatch.js
 
 It uses native HTML events to dispatch actions upstream and RE:DOM component updates to update views downstream. That's it :)
