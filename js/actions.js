@@ -2,46 +2,41 @@ let id = Date.now();
 
 export default (app) => {
   return {
-    route: (path) => {
+    route: (state, path) => {
       const [ section ] = path;
 
-      app.data = {
-        ...app.data,
-        section: section
+      return {
+        ...state,
+        section
       };
-
-      app.update();
     },
-    section: section => {
+    section: (state, section) => {
       const hash = window.location.hash.slice(1).split('/');
 
       hash[0] = section;
 
       window.location.hash = hash.join('/');
     },
-    'toggle-debug': () => {
+    'toggle-debug': (state) => {
       const debug = !app.data.debug;
 
-      app.data = {
-        ...app.data,
+      return {
+        ...state,
         debug
       };
-      app.update();
     },
-    'toggle-logo': () => {
+    'toggle-logo': (state) => {
       const logo = !app.data.logo;
 
-      app.data = {
-        ...app.data,
+      return {
+        ...state,
         logo
       };
-
-      app.update();
     },
-    'add-text': ({ type, text }) => {
-      app.data = {
-        ...app.data,
-        editable: app.data.editable.concat(
+    'add-text': (state, { type, text }) => {
+      return {
+        ...state,
+        editable: state.editable.concat(
           {
             id: id++,
             type,
@@ -49,16 +44,14 @@ export default (app) => {
           }
         )
       };
-      app.update();
     },
-    'remove-text': (id) => {
-      app.data = {
-        ...app.data,
-        editable: app.data.editable.filter(item => {
+    'remove-text': (state, id) => {
+      return {
+        ...state,
+        editable: state.editable.filter(item => {
           return item.id !== id;
         })
       };
-      app.update();
     }
   };
 };

@@ -9,7 +9,19 @@ export const api = (app, actions) => {
     dispatch(app, 'route', hash);
   };
 
-  listen(app, actions);
+  const wrappedActions = {};
+
+  for (let key in actions) {
+    wrappedActions[key] = (data, e) => {
+      const newState = actions[key](app.data, data, e);
+      if (newState) {
+        app.data = newState;
+        app.update();
+      }
+    };
+  }
+
+  listen(app, wrappedActions);
 
   window.addEventListener('hashchange', onHash);
 
