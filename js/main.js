@@ -644,7 +644,21 @@ var api = function (app, actions) {
     dispatch(app, 'route', hash);
   };
 
-  listen(app, actions);
+  var wrappedActions = {};
+
+  var loop = function ( key ) {
+    wrappedActions[key] = function (data, e) {
+      var newState = actions[key](app.data, data, e);
+      if (newState) {
+        app.data = newState;
+        app.update();
+      }
+    };
+  };
+
+  for (var key in actions) loop( key );
+
+  listen(app, wrappedActions);
 
   window.addEventListener('hashchange', onHash);
 
@@ -655,56 +669,49 @@ var id = Date.now();
 
 var actions = function (app) {
   return {
-    route: function (path) {
+    route: function (state, path) {
       var section = path[0];
 
-      app.data = Object.assign({}, app.data,
+      return Object.assign({}, state,
         {section: section});
-
-      app.update();
     },
-    section: function (section) {
+    section: function (state, section) {
       var hash = window.location.hash.slice(1).split('/');
 
       hash[0] = section;
 
       window.location.hash = hash.join('/');
     },
-    'toggle-debug': function () {
+    'toggle-debug': function (state) {
       var debug = !app.data.debug;
 
-      app.data = Object.assign({}, app.data,
+      return Object.assign({}, state,
         {debug: debug});
-      app.update();
     },
-    'toggle-logo': function () {
+    'toggle-logo': function (state) {
       var logo = !app.data.logo;
 
-      app.data = Object.assign({}, app.data,
+      return Object.assign({}, state,
         {logo: logo});
-
-      app.update();
     },
-    'add-text': function (ref) {
+    'add-text': function (state, ref) {
       var type = ref.type;
       var text = ref.text;
 
-      app.data = Object.assign({}, app.data,
-        {editable: app.data.editable.concat(
+      return Object.assign({}, state,
+        {editable: state.editable.concat(
           {
             id: id++,
             type: type,
             text: text
           }
         )});
-      app.update();
     },
-    'remove-text': function (id) {
-      app.data = Object.assign({}, app.data,
-        {editable: app.data.editable.filter(function (item) {
+    'remove-text': function (state, id) {
+      return Object.assign({}, state,
+        {editable: state.editable.filter(function (item) {
           return item.id !== id;
         })});
-      app.update();
     }
   };
 };
