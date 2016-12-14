@@ -34,9 +34,11 @@ export default () => {
       };
     },
     'add-text': (state, { type, text }) => {
+      const { editable } = state;
+
       return {
         ...state,
-        editable: state.editable.concat(
+        editable: editable.concat(
           {
             id: id++,
             type,
@@ -46,9 +48,11 @@ export default () => {
       };
     },
     'remove-text': (state, id) => {
+      const { editable } = state;
+
       return {
         ...state,
-        editable: state.editable.filter(item => {
+        editable: editable.filter(item => {
           return item.id !== id;
         })
       };
