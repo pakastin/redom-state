@@ -1,6 +1,6 @@
 let id = Date.now();
 
-export default (app) => {
+export default () => {
   return {
     route: (state, path) => {
       const [ section ] = path;
@@ -18,7 +18,7 @@ export default (app) => {
       window.location.hash = hash.join('/');
     },
     'toggle-debug': (state) => {
-      const debug = !app.data.debug;
+      const debug = !state.debug;
 
       return {
         ...state,
@@ -26,7 +26,7 @@ export default (app) => {
       };
     },
     'toggle-logo': (state) => {
-      const logo = !app.data.logo;
+      const logo = !state.logo;
 
       return {
         ...state,
