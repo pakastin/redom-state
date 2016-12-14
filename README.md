@@ -5,9 +5,12 @@
 https://pakastin.github.io/redom-state/
 
 ## How it works?
-The whole [redux](https://github.com/reactjs/redux)-like state handling code is only [447 bytes](https://github.com/pakastin/redom-state/blob/master/js/utils/dispatch.js) uncompressed. Redux is [30.1 KB](https://cdnjs.cloudflare.com/ajax/libs/redux/3.6.0/redux.js) for comparison.
+The whole [redux](https://github.com/reactjs/redux)-like [state handling code is only 447 bytes](https://github.com/pakastin/redom-state/blob/master/js/utils/dispatch.js) uncompressed. Redux is [30.1 KB](https://cdnjs.cloudflare.com/ajax/libs/redux/3.6.0/redux.js) for comparison.
 
 It uses native HTML events to dispatch actions upstream and RE:DOM component updates to update views downstream. That's it :)
+
+Here's the action definitions:
+https://github.com/pakastin/redom-state/blob/master/js/actions.js
 
 ## Benefits
 - Fast
