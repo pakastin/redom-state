@@ -22,7 +22,7 @@ https://github.com/pakastin/redom-state/blob/master/js/utils/api.js
 - Flexible (stopPropagation etc)
 
 ## Future
-I will release this as a library, for now it's just an experiment.
+I will release this as a separate library or some parts included in RE:DOM. For now it's just an experiment.
 
 ## Run
 ```
