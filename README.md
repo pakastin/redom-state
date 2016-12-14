@@ -12,6 +12,12 @@ It uses native HTML events to dispatch actions upstream and RE:DOM component upd
 Here's the action definitions:
 https://github.com/pakastin/redom-state/blob/master/js/actions.js
 
+This is what binds everything together:
+https://github.com/pakastin/redom-state/blob/master/js/utils/api.js
+
+## Future
+I will release this as a library, for now it's just an experiment.
+
 ## Benefits
 - Fast
 - Small
