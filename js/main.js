@@ -667,7 +667,7 @@ var api = function (app, actions) {
 
 var id = Date.now();
 
-var actions = function (app) {
+var actions = function () {
   return {
     route: function (state, path) {
       var section = path[0];
@@ -683,13 +683,13 @@ var actions = function (app) {
       window.location.hash = hash.join('/');
     },
     'toggle-debug': function (state) {
-      var debug = !app.data.debug;
+      var debug = !state.debug;
 
       return Object.assign({}, state,
         {debug: debug});
     },
     'toggle-logo': function (state) {
-      var logo = !app.data.logo;
+      var logo = !state.logo;
 
       return Object.assign({}, state,
         {logo: logo});
