@@ -698,8 +698,10 @@ var actions = function () {
       var type = ref.type;
       var text = ref.text;
 
+      var editable = state.editable;
+
       return Object.assign({}, state,
-        {editable: state.editable.concat(
+        {editable: editable.concat(
           {
             id: id++,
             type: type,
@@ -708,8 +710,10 @@ var actions = function () {
         )});
     },
     'remove-text': function (state, id) {
+      var editable = state.editable;
+
       return Object.assign({}, state,
-        {editable: state.editable.filter(function (item) {
+        {editable: editable.filter(function (item) {
           return item.id !== id;
         })});
     }
