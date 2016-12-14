@@ -15,14 +15,14 @@ https://github.com/pakastin/redom-state/blob/master/js/actions.js
 This is what binds everything together:
 https://github.com/pakastin/redom-state/blob/master/js/utils/api.js
 
-## Future
-I will release this as a library, for now it's just an experiment.
-
 ## Benefits
 - Fast
 - Small
 - Asynchronous, but immediate
 - Flexible (stopPropagation etc)
+
+## Future
+I will release this as a library, for now it's just an experiment.
 
 ## Run
 ```
