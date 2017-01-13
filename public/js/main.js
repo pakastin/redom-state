@@ -625,6 +625,7 @@ App.prototype.update = function update () {
     var this$1 = this;
 
   // debounce to next animationframe
+  // (if there's multiple updates / animationframe, batch them and only do one)
   if (!this.rendering) {
     this.rendering = requestAnimationFrame(function () {
       this$1.rendering = null;
