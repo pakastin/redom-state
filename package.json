@@ -1,6 +1,6 @@
 {
   "name": "redom-state",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "RE:DOM state handling example",
   "main": "index.js",
   "scripts": {
