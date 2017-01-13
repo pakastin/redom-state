@@ -1,3 +1,5 @@
+/* global requestAnimationFrame */
+
 import { el } from 'redom';
 import { Menu } from './menu/index';
 import { Content } from './content/index';
@@ -14,11 +16,18 @@ export class App {
     this.data = data;
   }
   update () {
-    this.menu.update(this.data);
-    this.content.update(this.data);
-    this.debug.update(this.data);
+    // debounce to next animationframe
+    // (if there's multiple updates / animationframe, batch them and only do one)
+    if (!this.rendering) {
+      this.rendering = requestAnimationFrame(() => {
+        this.rendering = null;
 
-    window.localStorage && window.localStorage.setItem('redom-state', JSON.stringify(this.data));
+        this.menu.update(this.data);
+        this.content.update(this.data);
+        this.debug.update(this.data);
+      });
+      window.localStorage && window.localStorage.setItem('redom-state', JSON.stringify(this.data));
+    }
   }
   recoverData () {
     const savedData = window.localStorage && window.localStorage.getItem('redom-state');

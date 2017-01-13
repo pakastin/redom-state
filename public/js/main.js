@@ -610,6 +610,8 @@ Debug.prototype.log = function log (msg) {
   this.el.scrollTop = this.el.scrollHeight;
 };
 
+/* global requestAnimationFrame */
+
 var App = function App (data) {
   this.el = el('.app',
     this.menu = new Menu(),
@@ -620,11 +622,19 @@ var App = function App (data) {
   this.data = data;
 };
 App.prototype.update = function update () {
-  this.menu.update(this.data);
-  this.content.update(this.data);
-  this.debug.update(this.data);
+    var this$1 = this;
 
-  window.localStorage && window.localStorage.setItem('redom-state', JSON.stringify(this.data));
+  // debounce to next animationframe
+  if (!this.rendering) {
+    this.rendering = requestAnimationFrame(function () {
+      this$1.rendering = null;
+
+      this$1.menu.update(this$1.data);
+      this$1.content.update(this$1.data);
+      this$1.debug.update(this$1.data);
+    });
+    window.localStorage && window.localStorage.setItem('redom-state', JSON.stringify(this.data));
+  }
 };
 App.prototype.recoverData = function recoverData () {
   var savedData = window.localStorage && window.localStorage.getItem('redom-state');
