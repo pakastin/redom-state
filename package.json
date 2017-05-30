@@ -8,26 +8,26 @@
     "build-css": "stylus -u nib css/index.styl -c -o public/css/main.css",
     "build-js": "npm run lint && rollup -c -f iife js/index.js -o public/js/main.js",
     "lint": "semistandard js/**.js",
-    "uglify-js": "cd public/js && uglifyjs main.js -cmo main.min.js --source-map main.map.js",
+    "uglify-js": "cd public/js && uglifyjs main.js -cmo main.min.js",
     "dist": "gh-pages -d public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "chokidar": "~1.6.1",
-    "gh-pages": "~0.12.0",
+    "chokidar": "~1.7.0",
+    "gh-pages": "~1.0.0",
     "nib": "~1.1.2",
-    "redom": "~1.7.0",
-    "rollup": "~0.37.0",
-    "rollup-plugin-buble": "~0.14.0",
-    "rollup-plugin-node-resolve": "~2.0.0",
-    "semistandard": "~9.2.1",
+    "redom": "~2.6.4",
+    "rollup": "~0.41.6",
+    "rollup-plugin-buble": "~0.15.0",
+    "rollup-plugin-node-resolve": "~3.0.0",
+    "semistandard": "~11.0.0",
     "stylus": "~0.54.5",
-    "uglify-js": "~2.7.5"
+    "uglify-js": "~3.0.13"
   },
   "dependencies": {
     "compression": "~1.6.2",
-    "express": "~4.14.0"
+    "express": "~4.15.3"
   }
 }
